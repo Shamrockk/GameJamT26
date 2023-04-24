@@ -7,8 +7,12 @@ public class PlayerController : MonoBehaviour
       public float moveSpeed;
       public Rigidbody2D rb2d;
       private Vector2 moveInput;
+
       public float CurrentHealth;
       public float MaxHealth = 10;
+      public float bulletCooldown;
+      float bulletTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +23,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      bulletTimer -= Time.deltaTime;
       Movement();
       Shooting();
       Health();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+      if(collision.tag == "Bullet" && bulletTimer <= 0) 
+      {
+        CurrentHealth--;
+        print(CurrentHealth);
+        bulletTimer = bulletCooldown;
+      }
     }
 
     public void Movement() 
