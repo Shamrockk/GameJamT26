@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
      {
          CurrentHealth -= amount;
          if(CurrentHealth <= 0) {
-            // Destroy(GameObject);
+          
          }
      }
     
